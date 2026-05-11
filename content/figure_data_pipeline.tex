@@ -1,0 +1,107 @@
+% TikZ 数据预处理流程图（Nature 风格）
+% 配色: Wong (Nature Methods, 2011) 色盲安全调色板
+% 布局: 水平流水线 + 纵向分支，简洁克制
+\begin{tikzpicture}[
+    font=\small,
+    node distance=3mm and 6mm,
+]
+
+% Wong 调色板
+\definecolor{wongBlue}{HTML}{0072B2}
+\definecolor{wongSkyBlue}{HTML}{56B4E9}
+\definecolor{wongGreen}{HTML}{009E73}
+\definecolor{wongOrange}{HTML}{E69F00}
+\definecolor{wongVermillion}{HTML}{D55E00}
+\definecolor{wongRedPurple}{HTML}{CC79A7}
+
+% 淡色填充
+\definecolor{tintBlue}{HTML}{DCE8F4}
+\definecolor{tintGreen}{HTML}{DFF0E8}
+\definecolor{tintOrange}{HTML}{FDF2DC}
+\definecolor{tintVermillion}{HTML}{F8E5D6}
+\definecolor{tintSky}{HTML}{E4F0F9}
+\definecolor{tintRP}{HTML}{F3E4ED}
+
+% 节点样式
+\tikzset{
+    pipenode/.style={
+        rounded corners=2pt, draw=#1, line width=0.6pt, fill=#1!8,
+        minimum width=28mm, minimum height=10mm,
+        align=center, inner sep=2.5pt, font=\small
+    },
+    pipenode/.default=wongBlue,
+    iobox/.style={
+        rounded corners=2pt, draw=#1, line width=0.5pt, fill=#1!6,
+        minimum width=24mm, minimum height=8mm,
+        align=center, inner sep=2pt, font=\footnotesize
+    },
+    iobox/.default=wongSkyBlue,
+    arrow/.style={
+        -{Latex[length=1.8mm, width=1.6mm]}, line width=0.55pt, black!70
+    },
+    phaselabel/.style={
+        font=\footnotesize\bfseries, text=black!70
+    },
+}
+
+% ---- 输入源（顶部两个） ----
+\node[iobox=wongSkyBlue] (csv) {CSV 索引表};
+\node[iobox=wongSkyBlue, right=28mm of csv] (struct) {PDB / SDF\\结构文件};
+
+% ---- Stage 1: 索引读取与过滤 ----
+\node[pipenode=wongBlue, below=8mm of $(csv)!0.5!(struct)$] (s1)
+    {索引读取与过滤\\[-1pt]{\footnotesize \texttt{filter\_df}}};
+
+% ---- Stage 2: 结构批量加载 ----
+\node[pipenode=wongBlue, below=8mm of s1] (s2)
+    {结构批量加载\\[-1pt]{\footnotesize \texttt{read\_pocket} · \texttt{sdf\_load}}};
+
+% ---- Stage 3: 复合体构建 ----
+\node[pipenode=wongGreen, below=8mm of s2] (s3)
+    {复合体构建\\[-1pt]{\footnotesize \texttt{merge\_sdf\_pdb}}};
+
+% ---- Stage 4: 图特征转换 ----
+\node[pipenode=wongGreen, below=8mm of s3] (s4)
+    {图特征转换\\[-1pt]{\footnotesize \texttt{complex\_to\_data} · \texttt{pmap\_chunked}}};
+
+% ---- Stage 5: 有效性校验与标签回填 ----
+\node[pipenode=wongOrange, below=8mm of s4] (s5)
+    {有效性校验\\[-1pt]{\footnotesize \texttt{assign\_label2x}}};
+
+% ---- Stage 6: 数据持久化 ----
+\node[pipenode=wongOrange, below=8mm of s5] (s6)
+    {LMDB / CSV 缓存写入\\[-1pt]{\footnotesize \texttt{LmdbPPI.make\_shared}}};
+
+% ---- Stage 7: 时间维划分 ----
+\node[pipenode=wongVermillion, below=8mm of s6] (s7)
+    {时间维划分\\[-1pt]{\footnotesize \texttt{diffdock\_splits}}};
+
+% ---- 输出（底部） ----
+\node[iobox=wongRedPurple, below left=8mm and 2mm of s7] (train) {train 子集};
+\node[iobox=wongRedPurple, below=8mm of s7] (valid) {valid 子集};
+\node[iobox=wongRedPurple, below right=8mm and 2mm of s7] (test) {test 子集};
+
+% ---- 箭头：输入→Stage1 ----
+\draw[arrow] (csv.south)   -- (s1.north west);
+\draw[arrow] (struct.south) -- (s1.north east);
+
+% ---- 箭头：Stage间 ----
+\draw[arrow] (s1) -- (s2);
+\draw[arrow] (s2) -- (s3);
+\draw[arrow] (s3) -- (s4);
+\draw[arrow] (s4) -- (s5);
+\draw[arrow] (s5) -- (s6);
+\draw[arrow] (s6) -- (s7);
+
+% ---- 箭头：Stage7→输出 ----
+\draw[arrow] (s7.south) -- ++(0,-2mm) -| (train.north);
+\draw[arrow] (s7.south) -- (valid.north);
+\draw[arrow] (s7.south) -- ++(0,-2mm) -| (test.north);
+
+% ---- 右侧阶段标签 ----
+\node[phaselabel] at ([xshift=14mm]$(s1.south east)!0.5!(s2.north east)$) {数据准备};
+\node[phaselabel] at ([xshift=14mm]$(s3.south east)!0.5!(s4.north east)$) {特征构建};
+\node[phaselabel] at ([xshift=14mm]$(s5.south east)!0.5!(s6.north east)$) {质量控制};
+\node[phaselabel] at ([xshift=14mm]s7.east) {评测划分};
+
+\end{tikzpicture}

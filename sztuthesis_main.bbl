@@ -1,0 +1,300 @@
+\begin{thebibliography}{42}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax\else
+  \urlstyle{same}\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \DeclareUrlCommand\doi{\urlstyle{rm}}
+  \def\eprint#1#2{#2}
+\else
+  \def\doi#1{\href{https://doi.org/#1}{\nolinkurl{#1}}}
+  \let\eprint\href
+\fi
+
+\bibitem[Trott et~al.(2010)Trott and Olson]{trott2010autodock}
+TROTT~O, OLSON~A~J.
+\newblock Autodock vina: improving the speed and accuracy of docking with a new
+  scoring function, efficient optimization, and multithreading\allowbreak[J].
+\newblock Journal of Computational Chemistry, 2010, 31\allowbreak (2): 455-461.
+
+\bibitem[Crampon et~al.(2022)Crampon, Giorkallos, Deldossi, Baud, and
+  Steffenel]{ginosar2023survey}
+CRAMPON~K, GIORKALLOS~A, DELDOSSI~M, et~al.
+\newblock Machine-learning methods for ligand--protein molecular
+  docking\allowbreak[J].
+\newblock Drug Discovery Today, 2022, 27\allowbreak (1): 151-164.
+
+\bibitem[Verdonk et~al.(2003)Verdonk, Cole, Hartshorn, Murray, and
+  Taylor]{verdonk2003gold}
+VERDONK~M~L, COLE~J~C, HARTSHORN~M~J, et~al.
+\newblock Improved protein--ligand docking using gold\allowbreak[J].
+\newblock Proteins: Structure, Function, and Bioinformatics, 2003,
+  52\allowbreak (4): 609-623.
+
+\bibitem[Tropsha(2010)]{tropsha2010best}
+TROPSHA~A.
+\newblock Best practices for qsar model development, validation, and
+  exploitation\allowbreak[J].
+\newblock Molecular Informatics, 2010, 29\allowbreak (6--7): 476-488.
+
+\bibitem[Stepniewska-Dziubinska et~al.(2018)Stepniewska-Dziubinska,
+  Zielenkiewicz, and Siedlecki]{stepniewska2018pafnucy}
+STEPNIEWSKA-DZIUBINSKA~M~M, ZIELENKIEWICZ~P, SIEDLECKI~P.
+\newblock Development and evaluation of a deep learning model for
+  protein--ligand binding affinity prediction\allowbreak[J].
+\newblock Bioinformatics, 2018, 34\allowbreak (21): 3666-3674.
+
+\bibitem[Gilmer et~al.(2017)Gilmer, Schoenholz, Riley, Vinyals, and
+  Dahl]{gilmer2017neural}
+GILMER~J, SCHOENHOLZ~S~S, RILEY~P~F, et~al.
+\newblock Neural message passing for quantum chemistry\allowbreak[J].
+\newblock Proceedings of the 34th International Conference on Machine Learning,
+  2017: 1263-1272.
+
+\bibitem[Moon et~al.(2022)Moon, Zhung, Yang, Lim, and Kim]{moon2022pignet}
+MOON~S, ZHUNG~W, YANG~S, et~al.
+\newblock Pignet: a physics-informed deep learning model toward generalized
+  drug-target interaction predictions\allowbreak[J].
+\newblock Chemical Science, 2022, 13\allowbreak (13): 3661-3673.
+
+\bibitem[Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez,
+  Kaiser, and Polosukhin]{vaswani2017attention}
+VASWANI~A, SHAZEER~N, PARMAR~N, et~al.
+\newblock Attention is all you need\allowbreak[J].
+\newblock Advances in Neural Information Processing Systems, 2017, 30.
+
+\bibitem[Ying et~al.(2021)Ying, Cai, Luo, Zheng, Ke, He, Shen, and
+  Liu]{ying2021transformers}
+YING~C, CAI~T, LUO~S, et~al.
+\newblock Do transformers really perform badly for graph
+  representation?\allowbreak[C]//\allowbreak
+Advances in Neural Information Processing Systems: volume~34.
+\newblock 2021: 28877-28888.
+
+\bibitem[Lai et~al.(2024)Lai, Wang, Qian, Huang, Zhou, Ye, Wu, Wu, Zeng, and
+  Liu]{lai2024interformer}
+LAI~H, WANG~L, QIAN~R, et~al.
+\newblock Interformer: an interaction-aware model for protein-ligand docking
+  and affinity prediction\allowbreak[J].
+\newblock Nature Communications, 2024, 15\allowbreak (1): 10223.
+
+\bibitem[Corso et~al.(2023)Corso, St\"ark, Jing, Barzilay, and
+  Jaakkola]{corso2023diffdock}
+CORSO~G, ST\"ARK~H, JING~B, et~al.
+\newblock Diffdock: Diffusion steps, twists, and turns for molecular
+  docking\allowbreak[C]//\allowbreak
+International Conference on Learning Representations.
+\newblock 2023.
+
+\bibitem[McNutt et~al.(2021)McNutt, Francoeur, Aggarwal, Masuda, Meli, Ragoza,
+  Sunseri, and Koes]{mcnutt2021gnina}
+MCNUTT~A~T, FRANCOEUR~P, AGGARWAL~R, et~al.
+\newblock Gnina 1.0: molecular docking with deep learning\allowbreak[J].
+\newblock Journal of Cheminformatics, 2021, 13\allowbreak (1): 43.
+
+\bibitem[Caruana(1997)]{caruana1997multitask}
+CARUANA~R.
+\newblock Multitask learning\allowbreak[J].
+\newblock Machine Learning, 1997, 28\allowbreak (1): 41-75.
+
+\bibitem[Kendall et~al.(2018)Kendall, Gal, and Cipolla]{kendall2018multi}
+KENDALL~A, GAL~Y, CIPOLLA~R.
+\newblock Multi-task learning using uncertainty to weigh losses for scene
+  geometry and semantics\allowbreak[C]//\allowbreak
+Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition.
+\newblock 2018: 7482-7491.
+
+\bibitem[Liu et~al.(2019)Liu, Johns, and Davison]{liu2019end}
+LIU~S, JOHNS~E, DAVISON~A~J.
+\newblock End-to-end multi-task learning with
+  attention\allowbreak[C]//\allowbreak
+Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition.
+\newblock 2019: 1871-1880.
+
+\bibitem[Wu et~al.(2018)Wu, Ramsundar, Feinberg, Gomes, Geniesse, Pappu,
+  Leswing, and Pande]{wu2018moleculenet}
+WU~Z, RAMSUNDAR~B, FEINBERG~E~N, et~al.
+\newblock Moleculenet: a benchmark for molecular machine
+  learning\allowbreak[J].
+\newblock Chemical Science, 2018, 9\allowbreak (2): 513-530.
+
+\bibitem[Ruder(2017)]{ruder2017overview}
+RUDER~S.
+\newblock An overview of multi-task learning in deep neural
+  networks\allowbreak[J].
+\newblock arXiv preprint arXiv:1706.05098, 2017.
+
+\bibitem[Zhang et~al.(2021)Zhang and Yang]{zhang2021survey}
+ZHANG~Y, YANG~Q.
+\newblock A survey on multi-task learning\allowbreak[J].
+\newblock IEEE Transactions on Knowledge and Data Engineering, 2021,
+  34\allowbreak (12): 5586-5609.
+
+\bibitem[Buttenschoen et~al.(2024)Buttenschoen, Morris, and
+  Deane]{buttenschoen2024posebusters}
+BUTTENSCHOEN~M, MORRIS~G~M, DEANE~C~M.
+\newblock Posebusters: Ai-based docking methods fail to generate physically
+  valid poses or generalise to novel sequences\allowbreak[J].
+\newblock Chemical Science, 2024, 15: 3130-3139.
+
+\bibitem[Satorras et~al.(2021)Satorras, Hoogeboom, and Welling]{shen2022enet}
+SATORRAS~V~G, HOOGEBOOM~E, WELLING~M.
+\newblock E(n) equivariant graph neural networks\allowbreak[C]//\allowbreak
+Proceedings of the 38th International Conference on Machine Learning.
+\newblock 2021: 9302-9312.
+
+\bibitem[Chen et~al.(2018)Chen, Badrinarayanan, Lee, and
+  Rabinovich]{chen2018gradnorm}
+CHEN~Z, BADRINARAYANAN~V, LEE~C~Y, et~al.
+\newblock Gradnorm: Gradient normalization for adaptive loss balancing in deep
+  multitask networks\allowbreak[C]//\allowbreak
+Proceedings of the 35th International Conference on Machine Learning.
+\newblock 2018: 794-803.
+
+\bibitem[Yu et~al.(2020)Yu, Kumar, Gupta, Levine, and Finn]{yu2020gradient}
+YU~T, KUMAR~S, GUPTA~A, et~al.
+\newblock Gradient surgery for multi-task learning\allowbreak[C]//\allowbreak
+Advances in Neural Information Processing Systems: volume~33.
+\newblock 2020: 9624-9636.
+
+\bibitem[Devlin et~al.(2019)Devlin, Chang, Lee, and Toutanova]{devlin2019bert}
+DEVLIN~J, CHANG~M~W, LEE~K, et~al.
+\newblock {BERT}: Pre-training of deep bidirectional transformers for language
+  understanding\allowbreak[J].
+\newblock Proceedings of NAACL-HLT, 2019: 4171-4186.
+
+\bibitem[He et~al.(2022)He, Chen, Xie, Li, Doll{\'a}r, and Girshick]{he2022mae}
+HE~K, CHEN~X, XIE~S, et~al.
+\newblock Masked autoencoders are scalable vision learners\allowbreak[J].
+\newblock Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition, 2022: 16000-16009.
+
+\bibitem[Bishop(1994)]{bishop1994mixture}
+BISHOP~C~M.
+\newblock Mixture density networks\allowbreak[J].
+\newblock Technical Report NCRG/94/004, 1994.
+
+\bibitem[Jumper et~al.(2021)Jumper, Evans, Pritzel, Green, Figurnov,
+  Ronneberger, Tunyasuvunakool, Bates, {\v{Z}}{\'\i}dek, Potapenko, Bridgland,
+  et~al.]{jumper2021highly}
+JUMPER~J, EVANS~R, PRITZEL~A, et~al.
+\newblock Highly accurate protein structure prediction with
+  alphafold\allowbreak[J].
+\newblock Nature, 2021, 596\allowbreak (7873): 583-589.
+
+\bibitem[Moon et~al.(2024)Moon, Zhung, and Kim]{moon2024pignet2}
+MOON~S, ZHUNG~W, KIM~W~Y.
+\newblock Pignet2: A versatile deep learning-based protein-ligand interaction
+  prediction model for binding affinity scoring and virtual
+  screening\allowbreak[J].
+\newblock Digital Discovery, 2024, 3\allowbreak (2): 287-299.
+
+\bibitem[Lu et~al.(2025)Lu, Jiang, Liu, et~al.]{lu2025moba}
+LU~E, JIANG~Z, LIU~J, et~al.
+\newblock Moba: Mixture of block attention for long-context llms\allowbreak[J].
+\newblock arXiv preprint arXiv:2502.13189, 2025.
+
+\bibitem[Adasme et~al.(2021)Adasme, Linnemann, Bolz, Kaiser, Salentin, Haupt,
+  and Schroeder]{adasme2021plip}
+ADASME~M~F, LINNEMANN~K~L, BOLZ~S~N, et~al.
+\newblock Plip 2021: expanding the scope of the protein-ligand interaction
+  profiler to dna and rna\allowbreak[J].
+\newblock Nucleic Acids Research, 2021, 49\allowbreak (W1): W530-W534.
+
+\bibitem[Wang et~al.(2004)Wang, Fang, Lu, and Wang]{wang2004pdbbind}
+WANG~R, FANG~X, LU~Y, et~al.
+\newblock The pdbbind database: collection of binding affinities for
+  protein-ligand complexes with known three-dimensional
+  structures\allowbreak[J].
+\newblock Journal of Medicinal Chemistry, 2004, 47\allowbreak (12): 2977-2980.
+
+\bibitem[Liu et~al.(2015)Liu, Li, Han, Li, Liu, Zhao, Nie, Liu, and
+  Wang]{liu2015pdbbind}
+LIU~Z, LI~Y, HAN~L, et~al.
+\newblock Pdb-wide collection of binding data: current status of the pdbbind
+  database\allowbreak[J].
+\newblock Bioinformatics, 2015, 31\allowbreak (3): 405-412.
+
+\bibitem[Wang et~al.(2022)Wang, Zheng, Jiang, Li, Liu, Wen, Patronov, Qian,
+  Chen, and Yang]{zou2022stampdpi}
+WANG~P, ZHENG~S, JIANG~Y, et~al.
+\newblock Structure-aware multimodal deep learning for drug--protein
+  interaction prediction\allowbreak[J].
+\newblock Journal of Chemical Information and Modeling, 2022, 62\allowbreak
+  (5): 1308-1317.
+
+\bibitem[Chen et~al.(2020)Chen, Tan, Wang, Zhong, Liu, Yang, Luo, Chen, Jiang,
+  and Zheng]{chen2020transcpi}
+CHEN~L, TAN~X, WANG~D, et~al.
+\newblock Transcpi: Transformer-based compound--protein interaction
+  prediction\allowbreak[J].
+\newblock Journal of Chemical Information and Modeling, 2020, 60\allowbreak
+  (9): 4526-4538.
+
+\bibitem[Somnath et~al.(2021)Somnath, Bunne, and Krause]{somnath2021holoprot}
+SOMNATH~V~R, BUNNE~C, KRAUSE~A.
+\newblock Multi-scale representation learning on
+  proteins\allowbreak[C]//\allowbreak
+Advances in Neural Information Processing Systems: volume~34.
+\newblock 2021.
+
+\bibitem[Li et~al.(2020)Li, Zhou, Xu, Huang, Wang, Xiong, Huang, Dou, and
+  Xiong]{li2020monn}
+LI~S, ZHOU~J, XU~T, et~al.
+\newblock Structure-aware interactive graph neural networks for the prediction
+  of protein-ligand binding affinity\allowbreak[J].
+\newblock Proceedings of the 26th ACM SIGKDD International Conference on
+  Knowledge Discovery \& Data Mining, 2020: 975-985.
+
+\bibitem[Jiang et~al.(2021)Jiang, Hsieh, Wu, Kang, Wang, Wang, Liao, Shen, Xu,
+  Wu, Cao, and Hou]{jiang2021ign}
+JIANG~D, HSIEH~C~Y, WU~Z, et~al.
+\newblock Interactiongraphnet: A novel and efficient deep graph representation
+  learning framework for accurate protein--ligand interaction
+  predictions\allowbreak[J].
+\newblock Journal of Medicinal Chemistry, 2021, 64\allowbreak (24):
+  18209-18232.
+
+\bibitem[Koh et~al.(2024)Koh, Nguyen, Pan, May, and Webb]{koh2024psichic}
+KOH~H~Y, NGUYEN~A~T, PAN~S, et~al.
+\newblock Physicochemical graph neural network for learning protein--ligand
+  interaction fingerprints from sequence data\allowbreak[J].
+\newblock Nature Machine Intelligence, 2024, 6\allowbreak (6): 673-687.
+
+\bibitem[Lu et~al.(2022)Lu, Wu, Zhang, Rao, Li, and Zheng]{lu2022tankbind}
+LU~W, WU~Q, ZHANG~J, et~al.
+\newblock Tankbind: Trigonometry-aware neural networks for drug-protein binding
+  structure prediction\allowbreak[J].
+\newblock Advances in Neural Information Processing Systems, 2022, 35:
+  7236-7249.
+
+\bibitem[Jones et~al.(1997)Jones, Willett, Glen, Leach, and
+  Taylor]{jones1997gold}
+JONES~G, WILLETT~P, GLEN~R~C, et~al.
+\newblock Development and validation of a genetic algorithm for flexible
+  docking\allowbreak[J].
+\newblock Journal of Molecular Biology, 1997, 267\allowbreak (3): 727-748.
+
+\bibitem[Smith et~al.(2017)Smith, Isayev, and Roitberg]{smith2017ani}
+SMITH~J~S, ISAYEV~O, ROITBERG~A~E.
+\newblock Ani-1: an extensible neural network potential with dft accuracy at
+  force field computational cost\allowbreak[J].
+\newblock Chemical Science, 2017, 8\allowbreak (4): 3192-3203.
+
+\bibitem[Sch{\"u}tt et~al.(2017)Sch{\"u}tt, Kindermans, Sauceda, Chmiela,
+  Tkatchenko, and M{\"u}ller]{schutt2018schnet}
+SCH{\"U}TT~K~T, KINDERMANS~P~J, SAUCEDA~H~E, et~al.
+\newblock Schnet: A continuous-filter convolutional neural network for modeling
+  quantum interactions\allowbreak[C]//\allowbreak
+Advances in Neural Information Processing Systems: volume~30.
+\newblock 2017.
+
+\bibitem[Eastman et~al.(2023)Eastman, Behara, Dotson, Galvelis, Herber, Horber,
+  et~al.]{eastman2023spice}
+EASTMAN~P, BEHARA~P~K, DOTSON~D~L, et~al.
+\newblock Spice, a dataset of drug-like molecules and peptides for training
+  machine learning potentials\allowbreak[J].
+\newblock Scientific Data, 2023, 10\allowbreak (1): 11.
+
+\end{thebibliography}

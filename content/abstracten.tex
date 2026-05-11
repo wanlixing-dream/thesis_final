@@ -1,0 +1,13 @@
+%!TEX root = ../sztuthesis_main.tex
+\phantomsection
+\addcontentsline{toc}{section}{Abstract}
+
+\keywordsen{Pretraining and Fine-tuning; Protein-ligand Binding Prediction; Affinity Prediction; Pose Ranking; Docking Evaluation}
+\categoryen{TP391}
+\begin{abstracten}
+Protein-ligand binding prediction is a fundamental problem in computer-aided drug design. Its practical goal is to evaluate binding strength and candidate-pose quality for a given protein pocket and small-molecule ligand under limited computational budget. Existing deep learning methods are usually designed for either affinity prediction or pose ranking alone. Therefore, a key challenge is to learn stable complex representations in a unified modeling framework and then adapt them effectively to downstream prediction tasks. To address this problem, this thesis develops a two-stage pretraining-and-fine-tuning pipeline built on a Graph-Transformer backbone for protein-ligand complex modeling.
+
+The main contributions are as follows. First, a Graph-Transformer-based modeling framework is established for protein-ligand representation learning, and the corresponding training and inference procedures are organized for affinity prediction and candidate-pose ranking. Second, a two-stage training strategy is adopted: the model first learns stable complex representations during pretraining and is then adapted to target tasks during fine-tuning, which alleviates the optimization instability of training from scratch. Third, a relatively complete experimental workflow is organized, covering data preprocessing, model training, checkpoint selection, and offline evaluation, with Pearson correlation, AUROC, and Top-k success rate as the main evaluation metrics.
+
+The experiments are conducted from two aspects: affinity prediction and candidate-pose ranking. The results show that the proposed two-stage pipeline supports stable modeling and evaluation for related tasks, while the procedures for data processing, model selection, and metric calculation are also systematically organized. This work provides an extensible experimental basis for future improvements in protein-ligand scoring and candidate-pose reranking.
+\end{abstracten}

@@ -1,0 +1,175 @@
+\documentclass[border=3mm]{standalone}
+\usepackage{tikz}
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Sans CJK SC}
+\usetikzlibrary{positioning,arrows.meta,fit,backgrounds,calc,
+                 decorations.pathreplacing}
+\usepackage{amsmath,amssymb}
+\begin{document}
+\begin{tikzpicture}[font=\small,node distance=4mm and 5mm]
+
+% ========== 配色 ==========
+\definecolor{cB}{HTML}{4A90D9}   % 蓝-节点
+\definecolor{cO}{HTML}{E8913A}   % 橙-边/距离
+\definecolor{cG}{HTML}{5BAA6A}   % 绿-backbone
+\definecolor{cH}{HTML}{E8913A}   % 橙-任务头
+\definecolor{cK}{HTML}{555555}   % 深灰
+
+% ========== 样式 ==========
+\tikzset{
+  arr/.style={-{Latex[length=1.6mm,width=1.2mm]},line width=.55pt,cK},
+  blk/.style={rounded corners=2.5pt,draw=#1,line width=.6pt,
+    fill=#1!8,align=center,inner sep=3pt,font=\footnotesize},
+  blk/.default=cK,
+  bblk/.style={rounded corners=3pt,draw=cG,line width=.7pt,
+    fill=cG!6,align=center,inner sep=3pt,font=\footnotesize},
+  hblk/.style={rounded corners=2.5pt,draw=cH,line width=.6pt,
+    fill=cH!8,align=center,inner sep=3pt,font=\footnotesize},
+  panel/.style={rounded corners=4pt,draw=cK!25,line width=.4pt,
+    fill=black!2,inner sep=5pt},
+  plabel/.style={font=\footnotesize\bfseries,anchor=north west,text=cK},
+}
+
+% ================================================================
+%  (a) 图表示
+% ================================================================
+\begin{scope}[shift={(0,0)}]
+  % 配体（六边形 + 原子）
+  \coordinate(L0)at(0,0);
+  \draw[thick,cB!70,fill=cB!8,rounded corners=1pt]
+    (-.55,.32)--(.1,.65)--(.75,.32)--(.75,-.32)--(.1,-.65)--(-.55,-.32)--cycle;
+  \foreach \x/\y in {-.55/.32,.1/.65,.75/.32,.75/-.32,.1/-.65,-.55/-.32}{
+    \fill[cB] (\x,\y) circle(1.5pt);}
+  \node[font=\scriptsize,below=1.5mm,text=cB]at(0.1,-.65){配体};
+
+  % 口袋（弧形 + 残基）
+  \begin{scope}[shift={(2.4,0)}]
+    \draw[thick,cO!55,fill=cO!5,rounded corners=7pt]
+      (-.45,.8)--(0,1)--(.65,.8)--(.8,.2)--(.65,-.45)--(0,-.7)--(-.45,-.45)--(-.6,.2)--cycle;
+    \foreach \x/\y in {-.25/.55,.3/.65,.55,.25,.45/-.15,.1/-.4,-.35/-.05}{
+      \fill[cO] (\x,\y) circle(1.5pt);}
+    \node[font=\scriptsize,below=1.5mm,text=cO]at(0,-.7){口袋};
+  \end{scope}
+
+  \draw[arr](3.5,0)--(4.3,0);
+
+  % ---- 节点特征（竖向条形 = 每个原子一个向量）----
+  \begin{scope}[shift={(4.6,.5)}]
+    \foreach \i in {0,...,5}{
+      \pgfmathsetmacro{\h}{0.5+rnd*0.5}
+      \fill[cB!50] (\i*2.8mm,0) rectangle ++(2.4mm,-\h cm);
+    }
+    \draw[cK!35,line width=.3pt](0,.05) rectangle (16.8mm,-1.1cm);
+    \node[font=\tiny,anchor=north,text=cK]at(8.4mm,-1.15cm){节点特征};
+    \node[font=\tiny,anchor=south,text=cB!70]at(8.4mm,.1){每原子一维向量};
+  \end{scope}
+
+  % ---- 边特征（对称热力图 = 原子对距离矩阵）----
+  \begin{scope}[shift={(7.0,.5)}]
+    % 画成对角对称的小方块（距离矩阵感觉）
+    \foreach \r in {0,...,4}{
+      \foreach \c in {0,...,4}{
+        \pgfmathsetmacro{\dist}{abs(\r-\c)}
+        \pgfmathsetmacro{\val}{int(max(10, 80-\dist*18+rnd*12))}
+        \fill[cO!\val] (\c*2.3mm,-\r*2.3mm) rectangle ++(2mm,2mm);
+      }
+    }
+    % 对角线高亮
+    \foreach \i in {0,...,4}{
+      \fill[cO!90] (\i*2.3mm,-\i*2.3mm) rectangle ++(2mm,2mm);
+    }
+    \draw[cK!35,line width=.3pt](0,-11.5mm) rectangle (11.5mm,2mm);
+    \node[font=\tiny,anchor=north,text=cK]at(5.75mm,-12mm){边特征};
+    \node[font=\tiny,anchor=south,text=cO!70]at(5.75mm,2.5mm){原子对距离矩阵};
+  \end{scope}
+\end{scope}
+
+% (a) 面板
+\coordinate(pa_tl)at(-1.3,1.5);
+\coordinate(pa_br)at(9.5,-1.5);
+\node[plabel]at(pa_tl){\textsf{(a) 图表示}};
+\begin{scope}[on background layer]
+  \node[panel,fit=(pa_tl)(pa_br)](pa){};
+\end{scope}
+
+% ================================================================
+%  (b) 共享编码主干
+% ================================================================
+\begin{scope}[shift={(0,-3.6)}]
+
+  \node[plabel]at(-1.1,1.1){\textsf{(b) 共享编码主干}};
+
+  % 编码模块
+  \node[bblk,minimum width=18mm,minimum height=11mm]at(1.0,0)(intra){%
+    分子内\\编码器$\times\!12$};
+  \node[bblk,minimum width=18mm,minimum height=11mm,right=6mm of intra](inter){%
+    分子间\\编码器$\times\!6$};
+  \node[bblk,minimum width=18mm,minimum height=11mm,right=6mm of inter](eol){%
+    边输出层};
+
+  \draw[arr]([xshift=-7mm]intra.west)--(intra.west);
+  \draw[arr](intra)--(inter);
+  \draw[arr](inter)--(eol);
+  \draw[arr](eol.east)--++(7mm,0);
+
+  % 标注：参数共享
+  \node[font=\tiny,text=cG!70,anchor=south]
+    at([yshift=2mm]inter.north){所有任务共享同一组参数};
+
+  % 面板
+  \coordinate(pb_tl)at(-1.3,1.3);
+  \coordinate(pb_br)at(8.3,-1.0);
+  \begin{scope}[on background layer]
+    \node[panel,fit=(pb_tl)(pb_br)](pb){};
+  \end{scope}
+\end{scope}
+
+% ================================================================
+%  (c) 多任务输出头
+% ================================================================
+\begin{scope}[shift={(0,-6.6)}]
+
+  \node[plabel]at(-1.1,1.1){\textsf{(c) 多任务输出头}};
+
+  % 虚拟节点
+  \node[blk=cG,minimum width=13mm,minimum height=8mm]at(0.5,.0)(vn){%
+    虚拟\\[-1pt]节点};
+
+  % 三个头
+  \node[hblk,minimum width=16mm,minimum height=8mm,
+    right=8mm of vn,yshift=9mm](haff){%
+    {\scriptsize\textbf{亲和力回归}}\\[-1pt]{\tiny FFN$\to\mathrm{p}K_d$}};
+  \node[hblk,minimum width=16mm,minimum height=8mm,
+    right=8mm of vn](hpose){%
+    {\scriptsize\textbf{姿态选择}}\\[-1pt]{\tiny FFN$\to$logit}};
+  \node[hblk,minimum width=16mm,minimum height=8mm,
+    right=8mm of vn,yshift=-9mm](henergy){%
+    {\scriptsize\textbf{能量预测}}\\[-1pt]{\tiny MDN+原子}};
+
+  \draw[arr](vn.east)--(haff.west);
+  \draw[arr](vn.east)--(hpose.west);
+  \draw[arr](vn.east)--(henergy.west);
+
+  % task_mask 标注
+  \node[font=\scriptsize,text=cH,right=3mm of haff]{亲和力批次激活};
+  \node[font=\scriptsize,text=cH,right=3mm of hpose]{亲和力批次激活};
+  \node[font=\scriptsize,text=cB,right=3mm of henergy]{能量批次激活};
+
+  % 面板
+  \coordinate(pc_tl)at(-1.3,1.3);
+  \coordinate(pc_br)at(8.3,-1.5);
+  \begin{scope}[on background layer]
+    \node[panel,fit=(pc_tl)(pc_br)](pc){};
+  \end{scope}
+\end{scope}
+
+% ================================================================
+%  面板间箭头
+% ================================================================
+\draw[arr,thick]([yshift=-2mm]pa.south)--([yshift=2mm]pb.north)
+  node[midway,left,font=\tiny]{特征输入};
+\draw[arr,thick]([yshift=-2mm]pb.south)--([yshift=2mm]pc.north)
+  node[midway,left,font=\tiny]{共享表示};
+
+\end{tikzpicture}
+\end{document}

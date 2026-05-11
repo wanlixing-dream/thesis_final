@@ -1,0 +1,90 @@
+% TikZ 方法总体架构图
+% 配色: Okabe-Ito / Wong (Nature Methods, 2011) - 色盲安全
+\begin{tikzpicture}[
+    font=\small,
+    node distance=4mm and 5mm,
+]
+
+% Wong 调色板
+\definecolor{wongBlue}{HTML}{0072B2}
+\definecolor{wongSkyBlue}{HTML}{56B4E9}
+\definecolor{wongGreen}{HTML}{009E73}
+\definecolor{wongOrange}{HTML}{E69F00}
+\definecolor{wongVermillion}{HTML}{D55E00}
+
+\definecolor{tintSky}{HTML}{E7F1F7}
+\definecolor{tintBlue}{HTML}{E3EEF7}
+\definecolor{tintGreen}{HTML}{E8F2ED}
+\definecolor{tintOrange}{HTML}{FBF0DE}
+\definecolor{tintVermillion}{HTML}{F8E5D6}
+
+% 节点样式
+\tikzset{
+    datanode/.style   ={rounded corners=2pt, draw=wongSkyBlue,    line width=0.5pt, fill=tintSky,        minimum width=34mm, minimum height=9mm,  align=center, inner sep=2pt},
+    orgnode/.style    ={rounded corners=2pt, draw=wongBlue,       line width=0.5pt, fill=tintBlue,       minimum width=74mm, minimum height=13mm, align=center, inner sep=2pt},
+    encnode/.style    ={rounded corners=2pt, draw=wongGreen,      line width=0.5pt, fill=tintGreen,      minimum width=94mm, minimum height=15mm, align=center, inner sep=2pt},
+    submod/.style     ={rounded corners=1.5pt, draw=wongGreen,    line width=0.3pt, fill=white,          minimum width=22mm, minimum height=9mm,  align=center, inner sep=1pt, font=\footnotesize},
+    headnode/.style   ={rounded corners=2pt, draw=wongOrange,     line width=0.5pt, fill=tintOrange,     minimum width=30mm, minimum height=14mm, align=center, inner sep=2pt},
+    stratnode/.style  ={rounded corners=2pt, draw=wongVermillion, line width=0.5pt, fill=tintVermillion, minimum width=23mm, minimum height=9mm,  align=center, inner sep=2pt, font=\footnotesize},
+    layerlabel/.style ={font=\footnotesize\bfseries, anchor=east, align=right},
+    dataflow/.style   ={-{Latex[length=1.6mm,width=1.6mm]}, line width=0.5pt, black},
+    feedback/.style   ={-{Latex[length=1.6mm,width=1.6mm]}, line width=0.5pt, wongVermillion},
+}
+
+% ---- 输入数据层 ----
+\node[datanode] (energy_data) {能量数据源};
+\node[datanode, right=22mm of energy_data] (ap_data) {亲和力-姿态数据源};
+
+% ---- 多任务数据组织层 ----
+\coordinate (data_center) at ($(energy_data)!0.5!(ap_data)$);
+\node[orgnode, below=9mm of data_center] (data_module)
+    {\textbf{多任务数据模块}\\[1pt]交替批次采样\;$\cdot$\;task\_id\;$\cdot$\;task\_mask};
+
+% ---- 共享编码层（左右分区：左侧主标签，右侧 MoBA 子框） ----
+\node[encnode, below=9mm of data_module] (encoder) {};
+\node[anchor=west, align=center, font=\small]
+    at ([xshift=3mm]encoder.west)
+    {\textbf{共享图表示编码器}\\[1pt]复合图特征提取\;$\cdot$\;上下文交互建模};
+\node[submod, anchor=east] at ([xshift=-3mm]encoder.east) (moba)
+    {MoBA\\稀疏增强路径};
+
+% ---- 任务输出层（三个同尺寸）----
+\node[headnode, below=13mm of encoder.south, anchor=north]                             (head_pose)   {姿态\\选择头};
+\node[headnode, left=8mm of head_pose]                                                  (head_aff)    {亲和力\\回归头};
+\node[headnode, right=8mm of head_pose]                                                 (head_energy) {能量相关输出头\\[1pt]{\footnotesize g\_score\,$\cdot$\,g\_score\_pos}\\{\footnotesize 原子级辅助损失}};
+
+% ---- 训练策略层 ----
+\node[stratnode, below=11mm of head_aff.south,   anchor=north]                         (loss_w)  {多任务损失加权};
+\node[stratnode, right=5mm of loss_w]                                                  (pretrain){预训练初始化};
+\node[stratnode, right=5mm of pretrain]                                                (freeze)  {主干冻结/解冻};
+\node[stratnode, right=5mm of freeze]                                                  (routing) {任务路由};
+
+% ---- 层标签（左侧） ----
+\node[layerlabel] at ([xshift=-10mm]energy_data.west) {输入数据层};
+\node[layerlabel] at ([xshift=-10mm]data_module.west) {多任务数据组织层};
+\node[layerlabel] at ([xshift=-10mm]encoder.west)     {共享编码层};
+\node[layerlabel] at ([xshift=-10mm]head_aff.west)    {任务输出层};
+\node[layerlabel] at ([xshift=-10mm]loss_w.west)      {训练策略层};
+
+% ---- 数据流箭头（黑色）----
+\draw[dataflow] (energy_data.south) -- ([xshift=-18mm]data_module.north);
+\draw[dataflow] (ap_data.south)     -- ([xshift=18mm]data_module.north);
+\draw[dataflow] (data_module.south) -- (encoder.north);
+\draw[dataflow] ([xshift=-22mm]encoder.south) -- (head_aff.north);
+\draw[dataflow] (encoder.south)               -- (head_pose.north);
+\draw[dataflow] ([xshift=22mm]encoder.south)  -- (head_energy.north);
+
+% ---- 策略反馈箭头（朱红）----
+\draw[feedback] (loss_w.north)   -- (head_aff.south);
+\draw[feedback] (pretrain.north) -- ([xshift=-8mm]encoder.south);
+\draw[feedback] (freeze.north)   -- ([xshift=2mm]encoder.south);
+\draw[feedback] (routing.north)  -- ([xshift=10mm]encoder.south);
+
+% ---- 箭头图例（全图底部横向排列）----
+\node[anchor=north, font=\footnotesize]
+    at ([yshift=-6mm]$(loss_w.south)!0.5!(routing.south)$) (legend_node)
+    {\textbf{箭头图例：}\;
+     \protect\tikz\protect\draw[dataflow](0,0)--(6mm,0);\;数据流向\quad
+     \protect\tikz\protect\draw[feedback](0,0)--(6mm,0);\;策略作用于训练};
+
+\end{tikzpicture}

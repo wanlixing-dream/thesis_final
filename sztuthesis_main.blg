@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: sztuthesis_main.aux
+A level-1 auxiliary file: content/abstracten.aux
+The style file: gbt7714-numerical.bst
+A level-1 auxiliary file: content/additional.aux
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 150 items from 100.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: thesis-references.bib
+You've used 42 entries,
+            5261 wiz_defined-function locations,
+            1255 strings with 16975 characters,
+and the built_in function-call counts, 437978 in all, are:
+= -- 7600
+> -- 52460
+< -- 65574
++ -- 17785
+- -- 3196
+* -- 2320
+:= -- 60231
+add.period$ -- 126
+call.type$ -- 42
+change.case$ -- 343
+chr.to.int$ -- 16189
+cite$ -- 42
+duplicate$ -- 1032
+empty$ -- 2700
+format.name$ -- 1554
+if$ -- 113589
+int.to.chr$ -- 1
+int.to.str$ -- 43
+missing$ -- 0
+newline$ -- 233
+num.names$ -- 126
+pop$ -- 23332
+preamble$ -- 1
+purify$ -- 42
+quote$ -- 0
+skip$ -- 46230
+stack$ -- 0
+substring$ -- 20143
+swap$ -- 50
+text.length$ -- 840
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 528
+warning$ -- 0
+while$ -- 1025
+width$ -- 0
+write$ -- 601
